@@ -30,7 +30,6 @@ const Arrow = styled.div`
   z-index: 2;
   &:hover {
     background-color: rgb(0, 0, 0, 0.5);
-    
   }
   &:hover svg{
     opacity: 1.2;
@@ -81,7 +80,7 @@ const Desc = styled.p`
   margin: 50px 0px;
   font-size: 20px;
   font-weight: 500;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
 `;
 
 const Button = styled.button`
@@ -89,6 +88,9 @@ const Button = styled.button`
   font-size: 20px;
   background-color: transparent;
   cursor: pointer;
+  &:hover {
+    background-color: orange;
+  }
 `;
 
 const Slider = () => {
@@ -115,7 +117,7 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>Mua ngay</Button>
+              <Button>Đặt mua ngay</Button>
             </InfoContainer>
           </Slide>
         ))}
