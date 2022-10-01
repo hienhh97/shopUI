@@ -13,7 +13,7 @@ const Container = styled.div`
 `;
 
 const Announcement = () => {
-  return <Container>Đón chờ chương trình giảm giá lên tới 30% vào Black Friday này!</Container>;
+  return <Container>Đón chờ chương trình giảm giá lên tới 60% vào Black Friday này!</Container>;
 };
 
 export default Announcement;
