@@ -1,8 +1,9 @@
 import { Badge } from '@mui/material';
-import {Search, ShoppingCartOutlined, NotificationsActive} from '@mui/icons-material';
+import { Search, ShoppingCartOutlined, NotificationsActive } from '@mui/icons-material';
 import React from 'react'
 import styled from 'styled-components'
 import { mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     height: 60px;
@@ -69,35 +70,42 @@ const MenuItem = styled.div`
 const Navbar = () => {
   return (
     <Container>
-        <Wrapper>
-          <Left>
-            <Language>VIE</Language>
-            <SearchContainer>
-              <Input placeholder="Tìm kiếm" />
-              <Search style={ {color: "gray", fontSize: 16}}/>
-            </SearchContainer>
-          </Left>
-          <Center>
-            <Logo>SHOP DEMO
-            </Logo>
-          </Center>
-          <Right>
-            <MenuItem>
-              <Badge badgeContent={4} color="primary">
-                <NotificationsActive />
-              </Badge>
-            </MenuItem>
-            <MenuItem>
+      <Wrapper>
+        <Left>
+          <Language>VIE</Language>
+          <SearchContainer>
+            <Input placeholder="Tìm kiếm" />
+            <Search style={{ color: "gray", fontSize: 16 }} />
+          </SearchContainer>
+        </Left>
+        <Center>
+          <Link to={'/'}>
+            <Logo>SHOP DEMO</Logo>
+          </Link>
+        </Center>
+        <Right>
+          <MenuItem>
+            <Badge badgeContent={4} color="primary">
+              <NotificationsActive />
+            </Badge>
+          </MenuItem>
+          <MenuItem>
+            <Link to={'/cart'}>
               <Badge badgeContent={4} color="primary">
                 <ShoppingCartOutlined />
               </Badge>
-            </MenuItem>
-            <MenuItem>ĐĂNG KÝ</MenuItem>
-            <MenuItem>ĐĂNG NHẬP</MenuItem>
-          </Right>
-        </Wrapper>
+            </Link>
+          </MenuItem>
+          <Link to={`/register`}>
+            <MenuItem >ĐĂNG KÝ</MenuItem>
+          </Link>
+          <Link to={`/login`}>
+            <MenuItem >ĐĂNG NHẬP</MenuItem>
+          </Link>
+        </Right>
+      </Wrapper>
     </Container>
   )
 }
 
-export default Navbar
+export default Navbar;
