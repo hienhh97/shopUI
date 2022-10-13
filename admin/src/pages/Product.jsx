@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Chart from "../components/chart/Chart";
+import Chart from "../components/Chart";
 import { productData } from "../dummyData"
 import { Publish } from '@mui/icons-material';
 

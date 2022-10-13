@@ -1,6 +1,6 @@
-import Sidebar from "./components/sidebar/Sidebar";
-import Topbar from "./components/topbar/Topbar";
-import "./App.css";
+import Sidebar from "./components/Sidebar";
+import Topbar from "./components/Topbar";
+import styled from "styled-components";
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import UserList from "./pages/UserList";
@@ -10,11 +10,16 @@ import ProductList from "./pages/ProductList";
 import Product from "./pages/Product";
 import NewProduct from "./pages/NewProduct";
 
+const Container = styled.div`
+  display: flex;
+  margin-top: 10px;
+`;
+
 function App() {
   return (
     <Router>
       <Topbar />
-      <div className="container">
+      <Container>
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -25,7 +30,7 @@ function App() {
           <Route path="/product/:productId" element={<Product />} />
           <Route path="/newproduct" element={<NewProduct />} />
         </Routes>
-      </div>
+      </Container>
     </Router>
   );
 }

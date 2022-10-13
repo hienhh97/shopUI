@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { DataGrid } from "@mui/x-data-grid";
-import { DeleteOutline } from '@mui/icons-material';
+import { DeleteForever, Edit } from '@mui/icons-material';
 import { userRows } from "../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -19,15 +19,21 @@ const UserListImg = styled.img`
   object-fit: cover;
   margin-right: 10px;
 `;
-const UserListEdit = styled.button`
+const UserListEdit = styled(Edit)`
   border: none;
   border-radius: 10px;
-  padding: 5px 10px;
-  background-color: #3bb077;
-  color: white;
+  padding: 3px 5px;
+  //background-color: #3bb077;
+  color: blueviolet;
   cursor: pointer;
   margin-right: 20px;
 `;
+const DeleteIcon = styled(DeleteForever)`
+  margin-bottom: 2px;
+  padding: 5px 5px;
+  color: red;
+  cursor: pointer;
+`
 
 export default function UserList() {
   const [data, setData] = useState(userRows);
@@ -72,12 +78,7 @@ export default function UserList() {
             <Link to={"/user/" + params.row.id}>
               <UserListEdit>Edit</UserListEdit>
             </Link>
-            <DeleteOutline onClick={() => handleDelete(params.row.id)}>
-              <style>
-                color: red;
-                cursor: pointer;
-              </style>
-            </DeleteOutline>
+            <DeleteIcon onClick={() => handleDelete(params.row.id)}/>
           </>
         );
       },

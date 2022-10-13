@@ -29,7 +29,10 @@ const ProductListEdit = styled.button`
     cursor: pointer;
     margin-right: 20px;
 `;
-
+const DeleteIcon = styled(DeleteOutline)`
+    color: red;
+    cursor: pointer;
+`
 
 export default function ProductList() {
   const [data, setData] = useState(productRows);
@@ -74,13 +77,8 @@ export default function ProductList() {
             <Link to={"/product/" + params.row.id}>
               <ProductListEdit>Edit</ProductListEdit>
             </Link>
-              <DeleteOutline 
-                  onClick={() => handleDelete(params.row.id)}>
-                <style>
-                  color: red;
-                  cursor: pointer;
-                </style>
-              </DeleteOutline>
+              <DeleteIcon 
+                  onClick={() => handleDelete(params.row.id)}/>
           </>
         );
       },
