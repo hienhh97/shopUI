@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { login } from "../redux/apiCalls";
+import { login } from "../redux/apiCallLogin";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -57,10 +58,9 @@ const Button = styled.button`
   }
 `;
 
-const Link = styled.a`
+const LinkTo = styled.a`
   margin: 5px 0px;
   font-size: 12px;
-  text-decoration: underline;
   cursor: pointer;
 `;
 
@@ -81,23 +81,26 @@ const Login = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>SIGN IN</Title>
+        <Title>BẠN CẦN PHẢI ĐĂNG NHẬP</Title>
         <Form>
           <Input
-            placeholder="username"
+            placeholder="tên tài khoản"
             onChange={(e) => setUsername(e.target.value)}
           />
           <Input
-            placeholder="password"
+            placeholder="mật khẩu"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button onClick={handleClick} disabled={isFetching}>
-            LOGIN
+            ĐĂNG NHẬP
           </Button>
-          {error && <Error>Something went wrong...</Error>}
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          {error && <Error>Vui lòng kiểm tra lại tên đăng nhập hoặc mật khẩu!</Error>}
+          <LinkTo >
+            <Link to={"/register"} style={{ textDecoration: 'none' }}>
+              TẠO TÀI KHOẢN MỚI
+            </Link>
+          </LinkTo>
         </Form>
       </Wrapper>
     </Container>

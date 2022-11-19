@@ -1,5 +1,5 @@
 import { Badge } from '@mui/material';
-import { Search, ShoppingCartOutlined, NotificationsActive } from '@mui/icons-material';
+import { Search, ShoppingCartOutlined, NotificationsActive, AccountCircle } from '@mui/icons-material';
 import React from 'react'
 import styled from 'styled-components'
 import { mobile } from "../responsive";
@@ -8,7 +8,12 @@ import { useSelector } from 'react-redux';
 
 const Container = styled.div`
     height: 60px;
-    background-color: #82E0AA;
+    background-color: #669999;
+    color: white;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    z-index: 9999;
     ${mobile({ height: "50px" })}
 `;
 
@@ -20,7 +25,7 @@ const Wrapper = styled.div`
     ${mobile({ padding: "10px 0px" })}
 `;
 const SearchContainer = styled.div`
-  border: 1px solid lightgray;
+  height: 30px;
   display: flex;
   align-items: center;
   margin-left: 25px;
@@ -43,29 +48,52 @@ const Right = styled.div`
   font-weight: 700;
   ${mobile({ flex: 2, justifyContent: "center" })}
 `;
-const Language = styled.span`
-  font-size: 14px;
-  cursor: pointer;
-  font-weight: 700;
-  ${mobile({ display: "none" })}
-`;
 
 const Input = styled.input`
   border: none;
+  height: 100%;
+  width: 100%;
+  font-size: 13px;
   ${mobile({ width: "50px" })}
 `;
 
 const Logo = styled.h1`
   font-weight: bold;
+  color: white;
   ${mobile({ fontSize: "24px" })}
 `;
 
-const MenuItem = styled.div`
+const MenuIcon = styled.div`
   font-size: 14px;
   cursor: pointer;
-  margin-left: 20px;
-  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
-`;
+  margin-left: 15px;
+  color: white;
+`
+
+const Profile = styled.div`
+  padding: 0px 20px;
+  .options{
+    display: none;
+    align-items: center;
+  };
+  .option{
+    padding: 5px;
+    cursor: pointer;
+    min-width: 80px;
+    background-color: white;
+    color: black;
+    &:hover{
+      color: orange;
+    }
+  }
+  &:hover{
+      .options {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+      }
+    }
+`
 
 const Navbar = () => {
   const quantity = useSelector(state => state.cart.quantity)
@@ -73,36 +101,43 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-          <Language>VIE</Language>
-          <SearchContainer>
-            <Input placeholder="Tìm kiếm" />
-            <Search style={{ color: "gray", fontSize: 16 }} />
-          </SearchContainer>
+          <Link to={'/'} style={{ textDecoration: 'none' }}>
+            <Logo >SHOP DEMO</Logo>
+          </Link>
         </Left>
         <Center>
-          <Link to={'/'}>
-            <Logo>SHOP DEMO</Logo>
-          </Link>
+          <SearchContainer>
+            <Input placeholder="Tìm sản phẩm, danh mục,..." />
+            <button style={{
+              cursor: "pointer",
+              width: "110px",
+              height: "34px",
+            }}>
+              <Search style={{ color: "gray", fontSize: 13 }} />
+              Tìm kiếm
+            </button>
+          </SearchContainer>
         </Center>
         <Right>
-          <MenuItem>
+          <MenuIcon>
             <Badge badgeContent={4} color="primary">
               <NotificationsActive />
             </Badge>
-          </MenuItem>
-          <MenuItem>
+          </MenuIcon>
+          <MenuIcon>
             <Link to={'/cart'}>
               <Badge badgeContent={quantity} color="primary">
-                <ShoppingCartOutlined />
+                <ShoppingCartOutlined style={{ color: "white" }} />
               </Badge>
             </Link>
-          </MenuItem>
-          <Link to={`/register`}>
-            <MenuItem >ĐĂNG KÝ</MenuItem>
-          </Link>
-          <Link to={`/login`}>
-            <MenuItem >ĐĂNG NHẬP</MenuItem>
-          </Link>
+          </MenuIcon>
+          <Profile>
+            <AccountCircle className="icon" />
+            <div className="options">
+              <span className='option'>Tài khoản</span>
+              <span className='option'>Đăng xuất</span>
+            </div>
+          </Profile>
         </Right>
       </Wrapper>
     </Container>

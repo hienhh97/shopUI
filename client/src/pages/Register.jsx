@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { mobile } from "../responsive";
+import { useState } from "react";
+import { publicRequest } from "../requestMethods";
+import { Link } from "react-router-dom";
+
 
 const Container = styled.div`
   width: 100vw;
@@ -39,6 +43,11 @@ const Input = styled.input`
   margin: 20px 10px 0px 0px;
   padding: 10px;
 `;
+const LinkTo = styled.a`
+  margin: 5px 0px;
+  font-size: 12px;
+  cursor: pointer;
+`;
 
 const Agreement = styled.span`
   font-size: 12px;
@@ -54,23 +63,50 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+
 const Register = () => {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await publicRequest.post("/auth/register", { email, username, password });
+      alert("Tạo tài khoản thành công! Vui lòng chuyển sang trang đăng nhập!")
+      console.log(res);
+    } catch (err) {
+      alert("Vui lòng kiểm tra lại thông tin HOẶC có thể tên đăng nhập/ email đã được sử dụng!")
+    };
+  }
   return (
     <Container>
       <Wrapper>
-        <Title>CREATE AN ACCOUNT</Title>
+        <Title>TẠO TÀI KHOẢN MỚI</Title>
         <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
+          <Input
+            placeholder="tên đăng nhập"
+            onChange={(e) => setUsername(e.target.value)} />
+          <Input
+            placeholder="email"
+            onChange={(e) => setEmail(e.target.value)} />
+          <Input
+            placeholder="mật khẩu"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)} />
+          <Input
+            placeholder="xác nhận mật khẩu"
+            type="password" />
           <Agreement>
-            By creating an account, I consent to the processing of my personal
-            data in accordance with the <b>PRIVACY POLICY</b>
+            Với việc tạo tài khoản, tôi đồng ý việc xử lý dữ liệu cá nhân
+            của mình theo <b> CHÍNH SÁCH BẢO MẬT</b>
           </Agreement>
-          <Button>CREATE</Button>
+          <Button onClick={handleClick}>ĐĂNG KÝ</Button>
+          <LinkTo >
+            <Link to={"/login"} style={{ textDecoration: 'none' }}>
+              CHUYỂN TỚI TRANG ĐĂNG NHẬP
+            </Link>
+          </LinkTo>
         </Form>
       </Wrapper>
     </Container>
